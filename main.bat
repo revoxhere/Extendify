@@ -2,25 +2,26 @@
 @echo off
 color F0
 title Sizeify
-SETLOCAL ENABLEDELAYEDEXPANSION
+set array=0
+cd %~dp0
+setlocal EnableDelayedExpansion
 cd resources
 goto drivescr
 
 :drivescr
-::use wmic to get available drives and save them to a file:
-wmic logicaldisk get name > drives.ini 
 cls
 echo Select the drive you want to extend
 echo 	Available drives:
+::use wmic to get available drives and save them to a file:
+for /f "tokens=2 delims==" %%d in ('wmic logicaldisk get name /format:value') do echo %%d >drives.ini
 ::parse values from the file:
-set/p array= < drives.ini
-set a=%array:~5,2%
-set b=%array:~8,2%
-set c=%array:~11,2%
-set d=%array:~14,2%
-set e=%array:~17,2%
-set f=%array:~20,2%
-::delete the temp file
+set/p array=< drives.ini
+set a=%array:~0,5%
+set b=%array:~2,2%
+set c=%array:~5,2%
+set d=%array:~7,2%
+set e=%array:~9,2%
+set f=%array:~11,2%
 del drives.ini
 ::create a selection screen using previously saved sets:
 cmdMenuSel F08F "%a%" "%b%" "%c%" "%d%" "%e%" "%f%"
@@ -97,7 +98,7 @@ echo Please wait...
 ::it's gonna shift registers and allow to copy a few dozens MB more.
 ::we also save mkdosfs log to file in order to identify problems
 timeout 1 >nul
-mkdosfs -n %drivelbl% -v %driveltr% 8386900 >> mkdosfs.log
+mkdosfs -n %drivelbl% -v %driveltr% 8386900
 ::we use errorlevel to dermine if action has been successfully completed
 IF ERRORLEVEL 0 goto finishscr
 IF ERRORLEVEL 1 goto failscr
@@ -119,8 +120,6 @@ goto finishscr
 echo An error occured. Make sure your drive isn't
 echo write-protected. You can try again if you believe
 echo it was just a program bug.
-echo See mkdosfs.log in /resources directory to 
-echo learn more about the problem.
 echo 	Do you want to try again?
 cmdMenuSel F08F "Yes" "No"
 if %ERRORLEVEL% == 1 drivescr
