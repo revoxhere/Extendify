@@ -1,3 +1,5 @@
+::SIZEIFY BY REVOX 2019
+::FEEL FREE TO USE PARTS OF THE CODE, IF YOU DO IT WOULD BE NICE TO GIVE CREDITS TO ME AND THIS REPO :)
 ::startup stuff
 @echo off
 color F0
@@ -98,7 +100,7 @@ echo Please wait...
 ::it's gonna shift registers and allow to copy a few dozens MB more.
 ::we also save mkdosfs log to file in order to identify problems
 timeout 1 >nul
-mkdosfs -n %drivelbl% -v %driveltr% 8386900
+mkdosfs -n "%drivelbl%" -v %driveltr% 8386900
 ::we use errorlevel to dermine if action has been successfully completed
 IF ERRORLEVEL 0 goto finishscr
 IF ERRORLEVEL 1 goto failscr
