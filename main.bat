@@ -3,7 +3,7 @@
 ::startup stuff
 @echo off
 color F0
-title Sizeify
+title Sizeify alpha 1b by revox
 set array=0
 cd %~dp0
 setlocal EnableDelayedExpansion
