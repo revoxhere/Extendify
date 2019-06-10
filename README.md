@@ -1,3 +1,4 @@
+![extendify alpha logo](https://i.imgur.com/SkFPIxj.png)
 # extendify
 
 A tool that will allow you to extend capacity of removable drives.
