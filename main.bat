@@ -2,15 +2,86 @@
 ::FEEL FREE TO USE PARTS OF THE CODE, IF YOU DO IT WOULD BE NICE TO GIVE CREDITS TO ME AND THIS REPO :)
 ::startup stuff
 @echo off 
-title Extendify alpha 1c by revox
+title Extendify alpha 2a by revox
 cd %~dp0
 setlocal EnableDelayedExpansion
+set drivelbl=New drive
+set driveltr=A:
 cd resources
 for /f "usebackq delims=" %%a in ("options.ini") do set %%a
 if %legacy-colors% == 0 color F0
 if %debug% == 1 echo DEBUG: set startup options
 if %debug% == 1 echo DEBUG: loaded options file
-goto drivescr
+goto selectscr
+
+:selectscr
+cls
+echo  What do you want to do?
+if %debug% == 1 echo DEBUG: awaiting input
+cmdMenuSel F08F "Extend capacity of a removable drive" "Restore original capacity of a removable drive"
+if %ERRORLEVEL% == 1 goto drivescr
+if %ERRORLEVEL% == 2 goto restorescr
+goto selectscr
+
+:restorescr
+cls
+echo  Select the drive you want to restore capacity
+echo 	 Available drives:
+::use wmic to get available drives and save them to a file:
+for /f "tokens=2 delims==" %%d in ('wmic logicaldisk get name /format:value') do echo %%d >drives.ini
+if %debug% == 1 echo DEBUG: wmic got disk list
+::parse values from the file:
+set/p array=< drives.ini
+set a=%array:~0,5%
+set b=%array:~2,2%
+set c=%array:~5,2%
+set d=%array:~7,2%
+set e=%array:~9,2%
+set f=%array:~11,2%
+if %debug% == 1 echo DEBUG: array generated
+del drives.ini
+if %debug% == 1 echo DEBUG: temp file deleted
+::create a selection screen using previously saved sets:
+if %debug% == 1 echo DEBUG: awaiting input
+cmdMenuSel F08F "%a%" "%b%" "%c%" "%d%" "%e%" "%f%"
+if %ERRORLEVEL% == 1 set driveltr=%a%
+if %ERRORLEVEL% == 2 set driveltr=%b%
+if %ERRORLEVEL% == 3 set driveltr=%c%
+if %ERRORLEVEL% == 4 set driveltr=%d%
+if %ERRORLEVEL% == 5 set driveltr=%e%
+if %ERRORLEVEL% == 6 set driveltr=%f%
+goto confirmrestore
+
+:confirmrestore
+cls
+echo  You have selected drive %driveltr%
+echo	 The drive will be reset to its orignal capacity
+echo  Be aware that this process will erase all data (format it)!
+echo 	 Continue?
+if %debug% == 1 echo DEBUG: awaiting input
+cmdMenuSel F08F "Yes" "No"
+if %ERRORLEVEL% == 1 goto restore
+if %ERRORLEVEL% == 2 goto restorescr
+goto confirmrestore
+
+:restore
+cls
+echo  Please wait...
+timeout 1 >nul
+::we use mkdosfs windows port to format the drive which will then use its original capacity
+mkdosfs -n "%drivelbl%" -v %driveltr%
+goto restorefinishscr
+
+:restorefinishscr
+cls
+echo  The drive has been successfully restored to its original capacity
+echo 	What do you want to do next?
+if %debug% == 1 echo DEBUG: awaiting input
+cmdMenuSel F08F "Go back to main menu" "Exit program"
+if %ERRORLEVEL% == 1 goto selectscr
+if %ERRORLEVEL% == 2 exit
+goto restorefinishscr
+
 
 :drivescr
 cls
