@@ -9,10 +9,26 @@ The program is in very early stage. Unexpected things can happen to your device.
 
 ### Installation
 
-Download latest [release](https://github.com/revoxhere/extendify/releases). 
-Then run the extendify*.exe in main program folder. No further installation needed.
-Currently only Windows is supported but Linux release is in the works.
+#### Windows:
+Download latest [release](https://github.com/revoxhere/extendify/releases) for Windows. 
+
+Then run the extendify*.exe in main program folder.
+Windows version has more functions than linux one.
 *Extendify requires admin rights.*
+
+#### Linux:
+Download latest [release](https://github.com/revoxhere/extendify/releases) for Linux. 
+
+Make extendify executable:
+```
+sudo chmod 777 main_linux.sh
+```
+Then just run the program:
+```
+sudo ./main_linux.sh
+```
+Windows version has more functions than linux one.
+*Extendify requires root rights.*
 
 ### Usage
 
@@ -24,4 +40,5 @@ Just follow the steps and you should be able to successfully extend your removab
 * **Robert [(revox)](https://github.com/revoxhere) Piotrowski** - *Coding, testing, design & stuff*
 * **Szymon Mrowca** - *Testing* 
 * **Jens-Uwe Mager** - mkdosfs Windows port - *https://www1.mager.org/mkdosfs/*
-* https://TheBATeam.org/ - cmdMenuSel 
+* **Dave Hudson** - mkdosfs - *https://linux.die.net/man/8/mkdosfs*
+* **TheBATeam** - cmdMenuSel - *https://TheBATeam.org/*
