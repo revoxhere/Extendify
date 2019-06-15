@@ -25,7 +25,7 @@ sudo chmod 777 main_linux.sh
 ```
 Then just run the program:
 ```
-sudo ./main_linux.sh
+./main_linux.sh
 ```
 Windows version has more functions than linux one.
 *Extendify requires root rights.*
