@@ -13,10 +13,55 @@ function goto
     exit
 }
 
+#main menu
+: selectscr
+clear
+echo Extendify version 2c by revox
+echo  What do you want to do?
+echo 1 - Extend capacity of a removable drive 
+echo 2 - Restore original capacity of a removable drive
+read -r -p " 	 [1/2] " response
+case "$response" in
+    [1]|[2)
+        goto drivescr
+        ;;
+    *)
+		goto restorescr
+esac
+
+: restorescr
+clear
+echo  Enter path to drive you want to restore capacity [e.g. /dev/mspblk0]
+read -p "	 Drive: " driveltr
+clear
+echo  You have selected drive $driveltr
+read -r -p " 	 Is this correct? [y/n] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+        goto confirmrestore
+        ;;
+    *)
+		goto restorescr
+esac
+
+: confirmrestore
+clear
+echo	 The drive will be reset to its orignal capacity
+echo  Be aware that this process will erase all data [format it]!
+echo  Please make a backup of your data first.
+echo   Your system may also become unstable for a few seconds.
+read -r -p " 	 Continue? [y/n] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+        goto rmain
+        ;;
+    *)
+		goto selectscr
+esac
+
 #we prompt for drive and check if it's correct
 : drivescr
 clear
-echo Extendify version 2b by revox
 echo  Enter path to drive you want to extend [e.g. /dev/mspblk0]
 read -p "	 Drive: " driveltr
 clear
@@ -71,8 +116,30 @@ echo  Please wait...
 sudo umount $driveltr
 sudo mkdosfs -n "$drivelbl" $driveltr 4386900 -I -v
 sudo udevadm trigger
-ping localhost -q -c 3 >nul 
+ping localhost -q -c 3 >.nul 
 goto finishscr
+
+: rmain
+clear
+echo  Please wait...
+sudo umount $driveltr
+sudo mkdosfs -n "NEW DRIVE" $driveltr 4386900 -I -v
+sudo udevadm trigger
+ping localhost -q -c 3 >.nul 
+goto restorefinish
+
+: restorefinish
+clear
+echo   	     Thanks for using Extendify.
+echo  The drive has been successfully restored
+echo  to its original capacity.
+read -r -p " 	 Do you want to go back to main menu? [y/n] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+        goto selectscr
+        ;;
+    *)
+esac
 
 #we display end-screen
 : finishscr
