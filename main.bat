@@ -2,10 +2,10 @@
 ::FEEL FREE TO USE PARTS OF THE CODE, IF YOU DO IT WOULD BE NICE TO GIVE CREDITS TO ME AND THIS REPO :)
 ::startup stuff
 @echo off 
-title Extendify alpha 2b by revox
+title Extendify alpha 2c by revox
 cd %~dp0
 setlocal EnableDelayedExpansion
-set drivelbl=NEW DRIVE
+set drivelbl=NEW VOLUME
 set driveltr=A:
 cd resources
 for /f "usebackq delims=" %%a in ("options.ini") do set %%a
@@ -16,7 +16,7 @@ goto selectscr
 
 :selectscr
 cls
-echo Extendify version 2b by revox
+echo Extendify version 2c by revox
 echo  What do you want to do?
 if %debug% == 1 echo DEBUG: awaiting input
 cmdMenuSel F08F "Extend capacity of a removable drive" "Restore original capacity of a removable drive"
@@ -126,7 +126,7 @@ goto confirmdrive
 :labelscr
 ::set default drive label if user doesn't want a custom one
 if %debug% == 1 echo DEBUG: new drive name: %drivelbl%
-set drivelbl=NEW DRIVE
+set drivelbl=NEW VOLUME
 cls
 echo  Would you like to add a custom label to drive?
 if %debug% == 1 echo DEBUG: awaiting input
