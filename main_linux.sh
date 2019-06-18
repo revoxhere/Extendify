@@ -13,6 +13,15 @@ function goto
     exit
 }
 
+#we scan for avaiable usb drives
+REMOVABLE_DRIVES=""
+for _device in /sys/block/*/device; do
+    if echo $(readlink -f "$_device")|egrep -q "usb"; then
+        _disk=$(echo "$_device" | cut -f4 -d/)
+        REMOVABLE_DRIVES="$REMOVABLE_DRIVES /dev/$_disk"
+    fi
+done
+
 #main menu
 : selectscr
 clear
@@ -32,7 +41,8 @@ esac
 : restorescr
 clear
 echo  Enter path to drive you want to restore capacity [e.g. /dev/mspblk0]
-read -p "	 Drive: " driveltr
+echo  Found some removable drives: "$REMOVABLE_DRIVES"
+read -p "	 Drive you want to restore: " driveltr
 clear
 echo  You have selected drive $driveltr
 read -r -p " 	 Is this correct? [y/n] " response
@@ -63,7 +73,8 @@ esac
 : drivescr
 clear
 echo  Enter path to drive you want to extend [e.g. /dev/mspblk0]
-read -p "	 Drive: " driveltr
+echo  Found some removable drives: "$REMOVABLE_DRIVES"
+read -p "	 Drive you want to extend: " driveltr
 clear
 echo  You have selected drive $driveltr
 read -r -p " 	 Is this correct? [y/n] " response
