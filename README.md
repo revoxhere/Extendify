@@ -1,21 +1,56 @@
-![#extendify](https://i.imgur.com/SkFPIxj.png)
+<!--
+*** Official extendify readme
+*** copyright by revox, 2019
+*** Thanks to: othneildrew for providing nice template!
+-->
 
-A tool that will allow you to extend capacity of removable drives.
+<!-- LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/revoxhere/extendify">
+    <img src="https://i.imgur.com/SkFPIxj.png">
+  </a>
+
+ <h3 align="center">Extend capacity of your removable drives!</h3>
+   <p align="center">
+    <br />
+    <a href="https://www.youtube.com/watch?v=DuPO0actp-A"><strong>See video »</strong></a>
+    <br />
+    <a href="https://github.com/revoxhere/extendify/issues">Report Bugs</a>
+    ·
+    <a href="https://github.com/revoxhere/extendify/issues">Suggest Features</a>
+  </p>
+</p>
+<p align="center">
+  <a href="https://github.com/revoxhere/extendify">
+    <img src="https://i.imgur.com/mhOFUic.png">
+  </a>
+</p>
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [Disclaimer](#disclaimer)
+* [Installation](#installation)
+  * [Usage](#usage)
+* [Authors](#authors)
 
 ## Disclaimer
 
 Bear in mind, that after usage the disk will show ~4GB but you will be able to copy only ~5% more data depending on memory chip(s).
-The program is in early development. Please be careful on usage.
+The program is in early development. Please be careful on usage as inappropriate use can cause lose of data.
 
-### Installation
+## Installation
 
 #### Windows:
+
 Download latest [release](https://github.com/revoxhere/extendify/releases) for Windows. 
 
 Then run the extendify*.exe in main program folder.
 *Extendify requires admin rights.*
 
 #### Linux:
+
 Download latest [release](https://github.com/revoxhere/extendify/releases) for Linux. 
 
 Make extendify executable:
