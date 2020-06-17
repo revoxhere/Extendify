@@ -10,21 +10,10 @@
   <a href="https://github.com/revoxhere/extendify">
     <img src="https://i.imgur.com/SkFPIxj.png">
   </a>
-
- <h3 align="center">Extend capacity of your removable drives!</h3>
    <p align="center">
     <br />
     <a href="https://www.youtube.com/watch?v=DuPO0actp-A"><strong>See video »</strong></a>
-    <br />
-    <a href="https://github.com/revoxhere/extendify/issues">Report Bugs</a>
-    ·
-    <a href="https://github.com/revoxhere/extendify/issues">Suggest Features</a>
   </p>
-</p>
-<p align="center">
-  <a href="https://github.com/revoxhere/extendify">
-    <img src="https://i.imgur.com/mhOFUic.png">
-  </a>
 </p>
 
 <!-- TABLE OF CONTENTS -->
